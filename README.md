@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ChatGPT Clone
+
+A full-featured ChatGPT clone built with Next.js 14, TypeScript, and the OpenAI GPT-4o API. Features a two-column interface with conversation management and real-time chat.
+
+## Features
+
+- 🎨 Modern two-column interface (conversation list + chat)
+- 💬 Real-time chat with GPT-4o
+- 📝 Multiple conversation management
+- 🗑️ Delete conversations
+- 🎯 Automatic conversation titling
+- 🌙 Dark mode UI
+- ⚡ Built with Next.js 14 App Router
+- 🎨 Styled with Tailwind CSS
+
+## Prerequisites
+
+- Node.js 18+ installed
+- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. **Set up your OpenAI API key:**
+   
+   Create a `.env.local` file in the root directory and add your OpenAI API key:
+   ```env
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+   
+   You can copy `.env.local.example` and fill in your key.
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser:**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+chatgpt-clone/
+├── app/
+│   ├── api/
+│   │   └── chat/
+│   │       └── route.ts          # OpenAI API integration
+│   ├── layout.tsx                # Root layout
+│   ├── page.tsx                  # Main page with state management
+│   └── globals.css               # Global styles
+├── components/
+│   ├── Sidebar.tsx               # Conversation list sidebar
+│   ├── ChatInterface.tsx         # Main chat interface
+│   └── MessageList.tsx           # Message display component
+└── .env.local                    # Environment variables (create this)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How It Works
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Conversation Management**: Create new conversations, switch between them, and delete old ones
+2. **Chat Interface**: Type messages and get responses from GPT-4o
+3. **Auto-naming**: The first message in a conversation automatically becomes its title
+4. **Persistent UI**: Conversations are stored in React state (can be extended to use a database)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technologies Used
 
-## Learn More
+- **Next.js 14**: React framework with App Router
+- **TypeScript**: Type-safe JavaScript
+- **Tailwind CSS**: Utility-first CSS framework
+- **Heroicons**: Beautiful hand-crafted SVG icons
+- **OpenAI API**: GPT-4o language model
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Building for Production
 
-## Deploy on Vercel
+```bash
+npm run build
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Make sure your OpenAI API key has sufficient credits
+- The app uses the `gpt-4o` model by default
+- Conversations are currently stored in React state (not persisted on refresh)
+
+## License
+
+MIT
