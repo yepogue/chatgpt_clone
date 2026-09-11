@@ -1,100 +1,55 @@
-# ChatGPT Clone
+# Primary Atlas
 
-A full-featured ChatGPT clone built with Next.js 14, TypeScript, and the OpenAI GPT-4o API. Features a two-column interface with conversation management and real-time chat.
+An interactive, source-linked precinct map for the September 1, 2026 Democratic primary in the Massachusetts Suffolk and Middlesex Senate District.
 
-## Features
+## What is included
 
-- 🎨 Modern two-column interface (conversation list + chat)
-- 💬 Real-time chat with GPT-4o
-- 📝 Multiple conversation management
-- 🗑️ Delete conversations
-- 🎯 Automatic conversation titling
-- 🌙 Dark mode UI
-- ⚡ Built with Next.js 14 App Router
-- 🎨 Styled with Tailwind CSS
+- All 59 district precincts, using official MassGIS 2022 ward and precinct boundaries.
+- Precinct-level votes for Will Brownsberger and Max Lander.
+- Turnout calculated from ballots cast and registered voters.
+- Hover, keyboard, search, and municipality filters.
+- Downloadable CSV results and GeoJSON boundaries.
+- Direct links to the original municipal election files and state boundary sources.
 
-## Prerequisites
+The mapped vote totals are the published precinct snapshot assembled from the four municipalities. A separate note reports the districtwide post-recount margin without treating it as precinct-level data.
 
-- Node.js 18+ installed
-- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+## Update the data
 
-## Getting Started
+1. Open `public/data/results.csv` in Excel or Google Sheets.
+2. Keep the header row and precinct IDs unchanged.
+3. Replace the numbers or add corrected rows.
+4. Export the sheet as a UTF-8 CSV with the same filename.
+5. Run the validation and build commands below.
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+See `MAINTENANCE.md` for the field definitions, expected totals, and a release checklist.
 
-2. **Set up your OpenAI API key:**
-   
-   Create a `.env.local` file in the root directory and add your OpenAI API key:
-   ```env
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
-   
-   You can copy `.env.local.example` and fill in your key.
-
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open your browser:**
-   
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## Project Structure
-
-```
-chatgpt-clone/
-├── app/
-│   ├── api/
-│   │   └── chat/
-│   │       └── route.ts          # OpenAI API integration
-│   ├── layout.tsx                # Root layout
-│   ├── page.tsx                  # Main page with state management
-│   └── globals.css               # Global styles
-├── components/
-│   ├── Sidebar.tsx               # Conversation list sidebar
-│   ├── ChatInterface.tsx         # Main chat interface
-│   └── MessageList.tsx           # Message display component
-└── .env.local                    # Environment variables (create this)
-```
-
-## How It Works
-
-1. **Conversation Management**: Create new conversations, switch between them, and delete old ones
-2. **Chat Interface**: Type messages and get responses from GPT-4o
-3. **Auto-naming**: The first message in a conversation automatically becomes its title
-4. **Persistent UI**: Conversations are stored in React state (can be extended to use a database)
-
-## Technologies Used
-
-- **Next.js 14**: React framework with App Router
-- **TypeScript**: Type-safe JavaScript
-- **Tailwind CSS**: Utility-first CSS framework
-- **Heroicons**: Beautiful hand-crafted SVG icons
-- **OpenAI API**: GPT-4o language model
-
-## Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
-
-## Building for Production
+## Run locally
 
 ```bash
-npm run build
-npm start
+npm install
+npm run dev
 ```
 
-## Notes
+Open the local URL printed in the terminal.
 
-- Make sure your OpenAI API key has sufficient credits
-- The app uses the `gpt-4o` model by default
-- Conversations are currently stored in React state (not persisted on refresh)
+## Validate a release
 
-## License
+```bash
+npm run lint
+npm run build
+```
 
-MIT
+This project uses the Sites-compatible vinext starter and can be deployed from the production build output.
+
+## Deploy to AI Builder Space
+
+The root `Dockerfile` creates a single-process standalone Node server. It binds to `0.0.0.0`, reads the platform-provided `PORT` environment variable, and defaults to port 8000 for local container testing.
+
+Before deploying:
+
+1. Put this project in a public GitHub repository.
+2. Commit and push the deployment files and application source.
+3. Choose a unique service name and the branch to deploy.
+4. Submit those three values through the AI Builder Space deployment workflow.
+
+No application secrets or custom environment variables are required for this dashboard.

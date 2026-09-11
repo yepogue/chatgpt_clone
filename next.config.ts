@@ -1,11 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
-  // Configure to use PORT environment variable
-  env: {
-    PORT: process.env.PORT || '8000',
-  },
+  // Produces a compact self-hosting Node bundle for Docker/Koyeb.
+  output: "standalone",
 };
 
 export default nextConfig;
